@@ -4,25 +4,21 @@ import {
     Box,
     Button,
     CssBaseline, Dialog, DialogContent, DialogTitle,
-    IconButton, Slide,
+    IconButton, Slide, SlideProps,
     Toolbar,
     Typography
 } from "@mui/material";
 import React, {useState} from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import {TransitionProps} from "@mui/material/transitions";
 import {DrawerWidth} from "@/app/navigation/NavigationConst";
 import Image from "next/image";
 
-const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) =>
-    <Slide
-        direction="up"
-        ref={ref}
-        in={props.in}
-        {...props}
-        timeout={{enter: 200, exit: 200}}
-    />
-);
+const Transition = React.forwardRef<unknown, SlideProps>((props, ref) => (
+    <Slide direction="up" ref={ref} {...props}>
+        {props.children}
+    </Slide>
+));
+Transition.displayName = "Transition";
 
 const TopBar = () => {
 
@@ -36,7 +32,7 @@ const TopBar = () => {
             sx={{width: `calc(100% - ${DrawerWidth}px)`, ml:`${DrawerWidth}px`}}>
              <Toolbar>
                  <Typography variant="h6"
-                             omponent="div"
+                             component="div"
                              sx={{flexGrow: 1}} >
                      James MUI Playground
                  </Typography>
